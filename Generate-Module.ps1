@@ -1,6 +1,7 @@
 param (
 	[Parameter(Mandatory = $true)]
-	$ModuleName
+	$ModuleName,
+	$BaseModules
 )
 
 . $PSScriptRoot\Parsers.ps1
@@ -9,8 +10,15 @@ param (
 $definition = [xml](Get-Content ".\$ModuleName.xml")
 $classes = ($definition.jsdoc.classes | % { Parse-Class $_ } | % { Generate-Class $_ }) -join "`n"
 
+$references = if ($BaseModules) {
+	$BaseModules | % { "/// <reference path=`"$_.d.ts`"/>`n" }
+} else {
+	''
+}
+
 @"
 /// <reference path="../typings/tsd.d.ts"/>
+$references
 declare module '$ModuleName' {
 $classes
 }

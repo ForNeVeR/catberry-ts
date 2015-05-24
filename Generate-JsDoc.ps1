@@ -1,4 +1,6 @@
-$catberryPath = '.\catberry\lib'
+function Generate-Doc($module, $path) {
+  cmd /c "jsdoc -r $path -t templates/haruki -d console -q format=xml > $module.xml"
+}
 
-jsdoc -r $catberryPath -d docs
-cmd /c "jsdoc -r $catberryPath -t templates/haruki -d console -q format=xml > catberry.xml"
+Generate-Doc 'catberry' '.\catberry\lib'
+Generate-Doc 'catberry-locator' '.\catberry-locator\lib'

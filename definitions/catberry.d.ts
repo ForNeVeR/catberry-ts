@@ -1,4 +1,6 @@
 ﻿/// <reference path="../typings/tsd.d.ts"/>
+/// <reference path="catberry-locator.d.ts"/>
+
 declare module 'catberry' {
 	class BootstrapperBase {
 

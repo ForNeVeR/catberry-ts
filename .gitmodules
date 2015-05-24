@@ -1,3 +1,6 @@
 [submodule "catberry"]
 	path = catberry
 	url = https://github.com/catberry/catberry.git
+[submodule "catberry-locator"]
+	path = catberry-locator
+	url = https://github.com/catberry/catberry-locator.git
