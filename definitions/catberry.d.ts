@@ -1,111 +1,5 @@
-﻿declare module 'catberry' {
-	class Bootstrapper extends BootstrapperBase {
-
-		Bootstrapper();
-
-		configure(): any;
- 		configure(): any;
- 		create(): Catberry;
-
-	}
-	class Catberry extends CatberryBase {
-		version: any;
- 		events: ModuleApiProvider;
- 		locator: ServiceLocator;
-
-		Catberry();
-
-		wrapDocument(): any;
- 		startWhenReady(): Promise;
- 		getMiddleware(): Function;
- 		build(): Promise;
-
-	}
-	class CookieWrapper {
-		setCookie: Array;
- 		cookieSetups: Array;
-
-		CookieWrapper();
-
-		getCookieString(): string;
- 		set(): string;
- 		initWithString(): any;
- 		getCookieString(): string;
- 		set(): string;
-
-	}
-	class DocumentRenderer extends DocumentRendererBase {
-
-		DocumentRenderer();
-
-		initWithState(): Promise;
- 		render(): Promise;
- 		renderComponent(): any;
- 		getComponentById(): Object;
- 		collectGarbage(): Promise;
- 		createComponent(): Promise<Element>;
- 		_getId(): string;
- 		render(): any;
-
-	}
-	class ComponentLoader extends LoaderBase {
-
-		ComponentLoader();
-
-		load(): Promise;
- 		getComponentsByNames(): Object;
- 		load(): Promise<Object>;
- 		getComponentsByNames(): Object;
-
-	}
-	class StoreLoader extends LoaderBase {
-
-		StoreLoader();
-
-		load(): Promise;
- 		getStoresByNames(): Object;
- 		load(): Promise<Object>;
- 		getStoresByNames(): Object;
-
-	}
-	class Logger {
-
-		Logger();
-
-		trace(): any;
- 		info(): any;
- 		warn(): any;
- 		error(): any;
- 		fatal(): any;
-
-	}
-	class ModuleApiProvider extends ModuleApiProviderBase {
-		cookie: CookieWrapper;
-
-		ModuleApiProvider();
-
-		notFound(): Promise;
- 		redirect(): Promise;
- 		clearFragment(): Promise;
- 		notFound(): Promise;
- 		redirect(): Promise;
- 		clearFragment(): Promise;
- 		getInlineScript(): String;
- 		on(): ModuleApiProviderBase;
- 		once(): ModuleApiProviderBase;
- 		removeListener(): ModuleApiProviderBase;
- 		removeAllListeners(): ModuleApiProviderBase;
-
-	}
-	class RequestRouter {
-
-		RequestRouter();
-
-		route(): Promise;
- 		go(): Promise;
- 		route(): any;
-
-	}
+﻿/// <reference path="../typings/tsd.d.ts"/>
+declare module 'catberry' {
 	class BootstrapperBase {
 
 		BootstrapperBase();
@@ -159,7 +53,6 @@
 		Bootstrapper();
 
 		configure(): any;
- 		configure(): any;
  		create(): Catberry;
 
 	}
@@ -174,7 +67,7 @@
 
 		BrowserBundleBuilder();
 
-		build(): Promise;
+		build(): Promise<any>;
 
 	}
 	class Catberry extends CatberryBase {
@@ -184,10 +77,8 @@
 
 		Catberry();
 
-		wrapDocument(): any;
- 		startWhenReady(): Promise;
- 		getMiddleware(): Function;
- 		build(): Promise;
+		getMiddleware(): Function;
+ 		build(): Promise<any>;
 
 	}
 	class ContextFactory {
@@ -198,14 +89,12 @@
 
 	}
 	class CookieWrapper {
-		setCookie: Array;
- 		cookieSetups: Array;
+		setCookie: Array<any>;
+ 		cookieSetups: Array<any>;
 
 		CookieWrapper();
 
-		getCookieString(): string;
- 		set(): string;
- 		initWithString(): any;
+		initWithString(): any;
  		getCookieString(): string;
  		set(): string;
 
@@ -214,14 +103,7 @@
 
 		DocumentRenderer();
 
-		initWithState(): Promise;
- 		render(): Promise;
- 		renderComponent(): any;
- 		getComponentById(): Object;
- 		collectGarbage(): Promise;
- 		createComponent(): Promise<Element>;
- 		_getId(): string;
- 		render(): any;
+		render(): any;
 
 	}
 	class ComponentFinder {
@@ -253,9 +135,7 @@
 
 		ComponentLoader();
 
-		load(): Promise;
- 		getComponentsByNames(): Object;
- 		load(): Promise<Object>;
+		load(): Promise<Object>;
  		getComponentsByNames(): Object;
 
 	}
@@ -263,9 +143,7 @@
 
 		StoreLoader();
 
-		load(): Promise;
- 		getStoresByNames(): Object;
- 		load(): Promise<Object>;
+		load(): Promise<Object>;
  		getStoresByNames(): Object;
 
 	}
@@ -274,12 +152,9 @@
 
 		ModuleApiProvider();
 
-		notFound(): Promise;
- 		redirect(): Promise;
- 		clearFragment(): Promise;
- 		notFound(): Promise;
- 		redirect(): Promise;
- 		clearFragment(): Promise;
+		notFound(): Promise<any>;
+ 		redirect(): Promise<any>;
+ 		clearFragment(): Promise<any>;
  		getInlineScript(): String;
  		on(): ModuleApiProviderBase;
  		once(): ModuleApiProviderBase;
@@ -298,9 +173,7 @@
 
 		RequestRouter();
 
-		route(): Promise;
- 		go(): Promise;
- 		route(): any;
+		route(): any;
 
 	}
 	class SerialWrapper {

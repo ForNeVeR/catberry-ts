@@ -13,10 +13,12 @@ This repository uses git submodules, so you should clone it recursively.
 
 Initial definitions
 -------------------
-To get the initial definitions, you should install [jsdoc tool][jsdoc], then
-execute the following:
+To get the initial definitions, you should install [jsdoc tool][jsdoc] and
+[tsd], then execute the following:
 
+    tsd reinstall --save
     .\Generate-JsDoc.ps1
     .\Generate-TsDefinitions.ps1
 
 [jsdoc]: http://usejsdoc.org/
+[tsd]: http://definitelytyped.org/tsd/

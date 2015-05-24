@@ -10,6 +10,7 @@ $definition = [xml](Get-Content ".\$ModuleName.xml")
 $classes = ($definition.jsdoc.classes | % { Parse-Class $_ } | % { Generate-Class $_ }) -join "`n"
 
 @"
+/// <reference path="../typings/tsd.d.ts"/>
 declare module '$ModuleName' {
 $classes
 }
