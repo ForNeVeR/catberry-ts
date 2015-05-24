@@ -317,8 +317,8 @@
 		StoreDispatcher();
 
 		getStoreData(): Object;
- 		sendAction(): Promise<*>;
- 		sendBroadcastAction(): Promise<Array<*>>;
+ 		sendAction(): Promise<any>;
+ 		sendBroadcastAction(): Promise<Array<any>>;
  		setState(): Array<String>;
  		getStore(): Promise<Object>;
 

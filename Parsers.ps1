@@ -64,6 +64,10 @@ function Parse-Parameter($parameter) {
 }
 
 function Parse-TypeName([string]$type) {
+	if ($type -ne $null -and $type.Contains('*')) {
+		$type = $type.Replace('*', 'any')
+	}
+
 	if (-not $type) {
 		'any'
 	} elseif ($type -eq 'function') {
