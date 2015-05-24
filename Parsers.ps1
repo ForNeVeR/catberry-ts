@@ -30,23 +30,30 @@ function Parse-Property($property) {
 }
 
 function Parse-Constructor($constructor) {
+	$parameters = if ($constructor.parameters) {
+		$constructor.parameters | ? {
+			-not $_.name.Contains('.') # TODO: These are complex parameter types; should be worked around at another level
+		} | % { Parse-Parameter $_ }
+	} else {
+		@()
+	}
+
 	@{
 		Name = $constructor.name
 		Description = $constructor.description
-		Parameters = $constructor.parameters | ? {
-			-not $_ -contains '.' # TODO: These are complex parameter types; should be worked around at another level
-		} | % { Parse-Parameter $_ }
+		Parameters = $parameters
 	}
 }
 
 function Parse-Function($function) {
 	$parameters = if ($function.parameters) {
-		$function.parameters | % { Parse-Parameter $_ } | ? {
-			-not $_ -contains '.' # TODO: These are complex parameter types; should be worked around at another level
-		}
+		$function.parameters | ? {
+			-not $_.name.Contains('.') # TODO: These are complex parameter types; should be worked around at another level
+		} | % { Parse-Parameter $_ }
 	} else {
 		$null
 	}
+
 	@{
 		Name = $function.name
 		Description = $function.description
