@@ -1,0 +1,3 @@
+[submodule "catberry"]
+	path = catberry
+	url = https://github.com/catberry/catberry.git
