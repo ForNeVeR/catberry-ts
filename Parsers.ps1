@@ -63,12 +63,17 @@ function Parse-Parameter($parameter) {
 	}
 }
 
+$genericClasses = @(
+	'Array',
+	'Promise'
+)
+
 function Parse-TypeName([string]$type) {
 	if ($type -ne $null -and $type.Contains('*')) {
 		$type = $type.Replace('*', 'any')
 	}
 
-	if (-not $type) {
+	$type = if (-not $type) {
 		'any'
 	} elseif ($type -eq 'function') {
 		'Function'
@@ -79,4 +84,10 @@ function Parse-TypeName([string]$type) {
 	} else {
 		$type
 	}
+
+	if ($genericClasses -contains $type) {
+		$type = "$type<any>"
+	}
+
+	$type
 }
