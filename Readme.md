@@ -9,7 +9,9 @@ for [Catberry Framework][catberry]. Finally it will be published at
 
 Cloning
 -------
-This repository uses git submodules, so you should clone it recursively.
+This repository uses git submodules, so you should clone it recursively:
+
+    git clone --recursive <git-repo-url>
 
 Initial definitions
 -------------------
