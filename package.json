@@ -12,6 +12,6 @@
         "node": ">=0.10"
     },
     "scripts": {
-        "compile": "node ./node_modules/tsd/build/cli.js reinstall --save && node_modules/typescript/bin/tsc --module commonjs generate_module.ts generate_jsdoc.ts"
+        "compile": "node ./node_modules/tsd/build/cli.js reinstall --save && node ./node_modules/typescript/bin/tsc.js --module commonjs generate_module.ts generate_jsdoc.ts"
     }
 }
