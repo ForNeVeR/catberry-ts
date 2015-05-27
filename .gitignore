@@ -1,4 +1,6 @@
 /typings/
+/node_modules/
 /*.xml
+/*.js
 
 tsconfig.json
