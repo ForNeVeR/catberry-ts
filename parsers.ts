@@ -35,6 +35,8 @@ function parseProperty(rawProperty) {
 }
 
 function parseConstructor(rawConstructor) {
+    console.log(rawConstructor);
+
     var parameters = [];
 
     if (rawConstructor.parameters) {
@@ -63,55 +65,39 @@ function parseFunction(rawFunction) {
         "name": rawFunction.name,
         "description": rawFunction.description,
         "parameters": parameters,
-        "returnvalue": parseParameter(rawFunction.returns)
+        "returnvalue": rawFunction.returns ? parseParameter(rawFunction.returns) : null
     };
 }
 
 function parseParameter(rawParameter) {
-    return rawParameter;
-    /*
-	@{
-		Name = $parameter.name
-		Description = $parameter.description
-		Type = Parse-TypeName $parameter.type
-	}
-    */
+    return {
+        "name": rawParameter.name,
+        "description": rawParameter.description,
+        "type": parseTypeName(rawParameter.type)
+    };
 }
-
-/*
-$genericClasses = @(
-	'Array',
-	'Promise'
-)
-*/
 
 var genericClasses = ['Array', 'Promise'];
 
+function parseTypeName(typeName) {
+    if (typeName && typeName.indexOf('*') >= 0) {
+        typeName = typeName.replace('*', 'any');
+    }
 
-function parseTypeName(typeName/*[string]$type*/) {
+    if (!typeName) {
+        typeName = 'any';
+    } else if (typeName == 'function') {
+        typeName = 'Function';
+    } else if (typeName.indexOf('.<') >= 0) {
+        typeName = typeName.replace('.', ''); // TODO: This is not the best way of handling generic types
+    } else if (typeName.indexOf(' .*', '')) {
+        typeName = typeName.replace(/ .*/, ''); // TODO: This is not the best way of handling multiple return types
+    }
+
+    if (genericClasses.indexOf(typeName) >= 0) {
+        typeName = typeName + "<any>";
+    }
+
     return typeName;
-    /*
-	if ($type -ne $null -and $type.Contains('*')) {
-		$type = $type.Replace('*', 'any')
-	}
-
-	$type = if (-not $type) {
-		'any'
-	} elseif ($type -eq 'function') {
-		'Function'
-	} elseif ($type.Contains('.<')) {
-		$type.Replace('.', '') # TODO: This is not the best way of handling generic types
-	} elseif ($type.Contains(' ')) {
-		$type -replace ' .*', '' # TODO: This is not the best way of handling multiple return types
-	} else {
-		$type
-	}
-
-	if ($genericClasses -contains $type) {
-		$type = "$type<any>"
-	}
-
-	$type
-    */
 }
 

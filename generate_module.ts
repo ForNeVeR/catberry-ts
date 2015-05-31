@@ -53,5 +53,6 @@ var moduleName = process.argv[2];
 
 getDefinition(moduleName).then((result) => {
     console.log(result["jsdoc"].classes.map(parsers.parseClass));
+    // result["jsdoc"].classes.map(parsers.parseClass);
 }, console.log);
 
