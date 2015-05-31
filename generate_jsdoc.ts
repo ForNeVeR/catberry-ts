@@ -1,4 +1,4 @@
-/// <reference path="./typings/shelljs/shelljs.d.ts"/>
+/// <reference path="typings/shelljs/shelljs.d.ts"/>
 import shell = require("shelljs");
 
 function generate_doc(module: string, path: string) {

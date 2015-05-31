@@ -1,5 +1,5 @@
-/// <reference path="./typings/node/node.d.ts"/>
-/// <reference path="./typings/xml2js/xml2js.d.ts"/>
+/// <reference path="typings/node/node.d.ts"/>
+/// <reference path="typings/xml2js/xml2js.d.ts"/>
 import fs = require("fs");
 import xml2js = require("xml2js");
 

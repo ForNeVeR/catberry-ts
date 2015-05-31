@@ -18,6 +18,6 @@ Initial definitions
 To get the initial definitions execute the following:
 
     $ npm install
-    $ npm compile
-    $ node ./generate-jsdoc.js
+    $ npm run compile
+    $ npm run generate-jsdoc
     $ .\Generate-TsDefinitions.ps1
