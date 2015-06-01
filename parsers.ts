@@ -48,7 +48,7 @@ function parseProperty(rawProperty: any): model.JsdocProperty {
     return {
         name: first(rawProperty.name),
         description: first(rawProperty.description),
-        type: null              // TODO
+        type: parseTypeName(first(first(rawProperty.type).names))
     };
 }
 
@@ -61,7 +61,9 @@ function parseFunction(rawFunction: any): model.JsdocFunction {
         name: first(rawFunction.name),
         description: first(rawFunction.description),
         parameters: emptyNull(rawFunction.parameters)
-            .filter((value) => first(value.name).indexOf('.') < 0) // TODO: These are complex parameter types; should be worked around at another level
+            // TODO: These are complex parameter types; should be
+            // worked around at another level
+            .filter((value) => first(value.name).indexOf('.') < 0)
             .map(parseParameter),
         returnvalue: parseParameter(first(rawFunction.returns))
     };
@@ -76,7 +78,9 @@ function parseConstructor(rawConstructor: any): model.JsdocConstructor {
         name: first(rawConstructor[1].name),
         description: first(rawConstructor[1].description),
         parameters: emptyNull(rawConstructor[1].parameters)
-            .filter((value) => first(value.name).indexOf('.') < 0) // TODO: These are complex parameter types; should be worked around at another level
+            // TODO: These are complex parameter types; should be
+            // worked around at another level
+            .filter((value) => first(value.name).indexOf('.') < 0)
             .map(parseParameter)
     };
 }
@@ -107,9 +111,12 @@ function parseTypeName(typeName: string): string {
     if (typeName == 'function') {
         typeName = 'Function';
     } else if (typeName.indexOf('.<') >= 0) {
-        typeName = typeName.replace(/\./g, ''); // TODO: This is not the best way of handling generic types
+        // TODO: This is not the best way of handling generic types
+        typeName = typeName.replace(/\./g, '');
     } else if (typeName.indexOf(' ') >= 0) {
-        typeName = typeName.replace(/ .*/, ''); // TODO: This is not the best way of handling multiple return types
+        // TODO: This is not the best way of handling multiple return
+        // types
+        typeName = typeName.replace(/ .*/, '');
     }
 
     if (genericClasses.indexOf(typeName) >= 0) {
