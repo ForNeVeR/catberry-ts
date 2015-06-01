@@ -1,103 +1,98 @@
-export function parseClass(rawClass) {
-    var functions = null;
-    var properties = null;
+/// <reference path="./jsdoc_model.ts"/>
+import model = require("jsdoc_model");
 
-    if (rawClass.functions) {
-        functions =
-            rawClass.functions
-            .filter((value) => value.access)
-            .map(parseFunction);
+function first(value: any): any {
+    if (!value) {
+        return value;
     }
 
-    if (rawClass.properties) {
-        properties =
-            rawClass.properties
-            .filter((value) => value.access)
-            .map(parseProperty);
+    if (Array.isArray(value) && value.length > 0) {
+        return value[0];
+    } else {
+        return undefined;
+    }
+}
+
+function emptyNull(value: Array<any>): Array<any> {
+    if (!value) {
+        return [];
+    } else {
+        return value;
+    }
+}
+
+export function parseClass(rawClass: any): model.JsdocClass {
+    if (!rawClass) {
+        return rawClass;
     }
 
     return {
-        "name": rawClass.name,
-        "description": rawClass.description,
-        "basename": rawClass.extends,
-        "properties": properties,
-        "constructor": parseConstructor(rawClass.constructor),
-        "functions": functions
+        name: first(rawClass.name),
+        description: first(rawClass.description),
+        basename: first(rawClass.extends),
+        properties: emptyNull(rawClass.properties)
+            .filter((value) => first(value.access).length == 0)
+            .map(parseProperty),
+        constructor: parseConstructor(rawClass.constructor),
+        functions: emptyNull(rawClass.functions)
+            .filter((value) => first(value.access).length == 0)
+            .map(parseFunction)
     };
 }
 
-function parseProperty(rawProperty) {
-    return {
-        "name": rawProperty.name,
-        "description": rawProperty.description,
-        "type": parseTypeName(rawProperty.type.names)
-    };
-}
-
-function parseConstructor(rawConstructor) {
-    console.log(rawConstructor);
-
-    var parameters = [];
-
-    if (rawConstructor.parameters) {
-        parameters = rawConstructor.parameters.filter((value) => {
-            value.name.indexOf(".") < 0 // TODO: These are complex parameter types; should be worked around at another level
-        }).map(parseParameter);
+function parseProperty(rawProperty: any): model.JsdocProperty {
+    if (!rawProperty) {
+        return rawProperty;
     }
 
     return {
-        "name": rawConstructor.name,
-        "description": rawConstructor.description,
-        "parameters": parameters
+        name: first(rawProperty.name),
+        description: first(rawProperty.description),
+        type: null              // TODO
     };
 }
 
-function parseFunction(rawFunction) {
-    var parameters = [];
-
-    if (rawFunction.parameters) {
-        parameters = rawFunction.parameters.filter((value) => {
-            value.name.indexOf(".") < 0 // TODO: These are complex parameter types; should be worked around at another level
-        }).map(parseParameter);
+function parseFunction(rawFunction: any): model.JsdocFunction {
+    if (!rawFunction) {
+        return rawFunction;
     }
 
     return {
-        "name": rawFunction.name,
-        "description": rawFunction.description,
-        "parameters": parameters,
-        "returnvalue": rawFunction.returns ? parseParameter(rawFunction.returns) : null
+        name: first(rawFunction.name),
+        description: first(rawFunction.description),
+        parameters: emptyNull(rawFunction.parameters)
+            .filter((value) => first(value.name).indexOf('.') < 0) // TODO: These are complex parameter types; should be worked around at another level
+            .map(parseParameter),
+        returnvalue: parseParameter(first(rawFunction.returns))
     };
 }
 
-function parseParameter(rawParameter) {
+function parseConstructor(rawConstructor: any): model.JsdocConstructor {
+    if (!rawConstructor) {
+        return rawConstructor;
+    }
+
     return {
-        "name": rawParameter.name,
-        "description": rawParameter.description,
-        "type": parseTypeName(rawParameter.type)
+        name: first(rawConstructor[1].name),
+        description: first(rawConstructor[1].description),
+        parameters: emptyNull(rawConstructor[1].parameters)
+            .filter((value) => first(value.name).indexOf('.') < 0) // TODO: These are complex parameter types; should be worked around at another level
+            .map(parseParameter)
     };
 }
 
-var genericClasses = ['Array', 'Promise'];
-
-function parseTypeName(typeName) {
-    if (typeName && typeName.indexOf('*') >= 0) {
-        typeName = typeName.replace('*', 'any');
+function parseParameter(rawParameter: any): model.JsdocParameter {
+    if (!rawParameter) {
+        return rawParameter;
     }
 
-    if (!typeName) {
-        typeName = 'any';
-    } else if (typeName == 'function') {
-        typeName = 'Function';
-    } else if (typeName.indexOf('.<') >= 0) {
-        typeName = typeName.replace('.', ''); // TODO: This is not the best way of handling generic types
-    } else if (typeName.indexOf(' .*', '')) {
-        typeName = typeName.replace(/ .*/, ''); // TODO: This is not the best way of handling multiple return types
-    }
+    return {
+        name: first(rawParameter.name),
+        description: first(rawParameter.description),
+        type: parseTypeName(first(rawParameter.type))
+    };
+}
 
-    if (genericClasses.indexOf(typeName) >= 0) {
-        typeName = typeName + "<any>";
-    }
-
+function parseTypeName(typeName: string): string {
     return typeName;
 }
-

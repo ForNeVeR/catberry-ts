@@ -5,7 +5,8 @@
 import fs = require("fs");
 import xml2js = require("xml2js");
 import promise = require("es6-promise");
-import parsers = require("parsers")
+import parsers = require("parsers");
+import util = require("util");
 
 var Promise = promise.Promise;
 
@@ -52,7 +53,12 @@ if (process.argv.length <= 2) {
 var moduleName = process.argv[2];
 
 getDefinition(moduleName).then((result) => {
-    console.log(result["jsdoc"].classes.map(parsers.parseClass));
-    // result["jsdoc"].classes.map(parsers.parseClass);
+    try {
+        // console.log(result["jsdoc"].classes.map(parsers.parseClass));
+        // result["jsdoc"].classes.map(parsers.parseClass);
+        console.log(util.inspect(parsers.parseClass(result["jsdoc"].classes[0]), false, null));
+    } catch (err) {
+        console.log(err);
+    }
 }, console.log);
 
