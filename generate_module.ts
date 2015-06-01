@@ -2,11 +2,14 @@
 /// <reference path="typings/xml2js/xml2js.d.ts"/>
 /// <reference path="typings/es6-promise/es6-promise.d.ts"/>
 /// <reference path="./parsers.ts"/>
+/// <reference path="./generators.ts"/>
 import fs = require("fs");
 import xml2js = require("xml2js");
 import promise = require("es6-promise");
-import parsers = require("parsers");
 import util = require("util");
+
+import parsers = require("parsers");
+import generators = require("generators");
 
 var Promise = promise.Promise;
 
