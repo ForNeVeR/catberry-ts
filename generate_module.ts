@@ -59,7 +59,7 @@ getDefinition(moduleName).then((result) => {
     try {
         // console.log(result["jsdoc"].classes.map(parsers.parseClass));
         // result["jsdoc"].classes.map(parsers.parseClass);
-        console.log(util.inspect(parsers.parseClass(result["jsdoc"].classes[0]), false, null));
+        console.log(util.inspect(result["jsdoc"].classes.map(parsers.parseClass), false, null));
     } catch (err) {
         console.log(err);
     }
