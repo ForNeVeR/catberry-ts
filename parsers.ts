@@ -93,6 +93,28 @@ function parseParameter(rawParameter: any): model.JsdocParameter {
     };
 }
 
+var genericClasses = ['Array', 'Promise'];
+
 function parseTypeName(typeName: string): string {
+    if (!typeName) {
+        return 'any';
+    }
+
+    if (typeName.indexOf('*') >= 0) {
+        typeName = typeName.replace(/\*/g, 'any');
+    }
+
+    if (typeName == 'function') {
+        typeName = 'Function';
+    } else if (typeName.indexOf('.<') >= 0) {
+        typeName = typeName.replace(/\./g, ''); // TODO: This is not the best way of handling generic types
+    } else if (typeName.indexOf(' ') >= 0) {
+        typeName = typeName.replace(/ .*/, ''); // TODO: This is not the best way of handling multiple return types
+    }
+
+    if (genericClasses.indexOf(typeName) >= 0) {
+        typeName = typeName + "<any>";
+    }
+
     return typeName;
 }
