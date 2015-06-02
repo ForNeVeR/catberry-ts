@@ -55,7 +55,7 @@ ${documentation}
 function generateMethod(jsdocMethod: model.JsdocFunction): string {
     var name = jsdocMethod.name;
     var parameters = jsdocMethod.parameters.map(generateVariable).join(', ');
-    var returnType = jsdocMethod.returnvalue ? jsdocMethod.returnvalue : 'any';
+    var returnType = jsdocMethod.returnvalue ? jsdocMethod.returnvalue.type : 'any';
     var documentation = generateFunctionDocumentation(jsdocMethod);
 
     return `
