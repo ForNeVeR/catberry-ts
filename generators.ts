@@ -4,9 +4,9 @@ import model = require("jsdoc_model");
 export function generateClass(jsdocClass: model.JsdocClass): string {
     var className = jsdocClass.name;
     var baseClassName = jsdocClass.basename;
-    var properties = jsdocClass.properties.map(generateProperty);
+    var properties = jsdocClass.properties.map(generateProperty).join("\n");
     var constructor = generateConstructor(jsdocClass.constructor);
-    var methods = jsdocClass.functions.map(generateMethod);
+    var methods = jsdocClass.functions.map(generateMethod).join("\n");
 
     var documentation = "";
 
