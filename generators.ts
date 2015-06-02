@@ -37,7 +37,7 @@ function generateProperty(jsdocProperty: model.JsdocProperty): string {
 
     return `
 ${documentation}
-\t\t${variable}
+\t\t${variable};
 `;
 }
 
