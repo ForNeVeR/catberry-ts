@@ -82,14 +82,12 @@ function generateFunctionDocumentation(jsdocFunction: model.JsdocFunction): stri
 
     var returnDoc = jsdocFunction.returnvalue && jsdocFunction.returnvalue.description ? `@return ${jsdocFunction.returnvalue.description}` : "";
 
-    var comment = prefixComment(2, `
-${jsdocFunction.description}
+    var comment = prefixComment(2, `${jsdocFunction.description}
 ${parameterDocs}
-${returnDoc}
-`);
+${returnDoc}`);
     return `
 \t\t/**
 ${comment}
-\t\t*/
+\t\t */
 `;
 }
