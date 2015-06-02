@@ -15,6 +15,7 @@ export interface JsdocConstructor {
     name: string;
     description: string;
     parameters: Array<JsdocParameter>;
+    returnvalue: JsdocParameter;
 }
 
 export interface JsdocFunction {

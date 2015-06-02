@@ -2,23 +2,72 @@
 import model = require("jsdoc_model");
 
 export function generateClass(jsdocClass: model.JsdocClass): string {
-    return "";
+    var className = jsdocClass.name;
+    var baseClassName = jsdocClass.basename;
+    var properties = jsdocClass.properties.map(generateProperty);
+    var constructor = generateConstructor(jsdocClass.constructor);
+    var methods = jsdocClass.functions.map(generateMethod);
+
+    var documentation = "";
+
+    if (jsdocClass.description) {
+        documentation =
+            `\t\t/**\n${prefixComment(2, jsdocClass.description)}\n\t\t*/`;
+    }
+
+    return `
+${documentation}
+\tclass ${className} ${baseClassName ? "extends" + baseClassName + " " : " "} {
+${properties}
+${constructor}
+${methods}
+\t} 
+`;
 }
 
 function generateProperty(jsdocProperty: model.JsdocProperty): string {
-    return "nothing";
+    var documentation = "";
+
+    if (jsdocProperty.description) {
+        documentation =
+            `\t\t/**\n${prefixComment(2, jsdocProperty.description)}\n\t\t*/`;
+    }
+
+    var variable = generateVariable(jsdocProperty);
+
+    return `
+${documentation}
+\t\t${variable}
+`;
 }
 
 function generateConstructor(jsdocConstructor: model.JsdocConstructor): string {
-    return "nothing";
+    var name = jsdocConstructor.name;
+    var parameters = jsdocConstructor.parameters.map(generateVariable).join(", ");
+    var documentation = generateFunctionDocumentation(jsdocConstructor);
+
+    return `
+${documentation}
+\t\t${name}(${parameters});
+`;
 }
 
 function generateMethod(jsdocMethod: model.JsdocFunction): string {
-    return "nothing";
+    var name = jsdocMethod.name;
+    var parameters = jsdocMethod.parameters.map(generateVariable).join(', ');
+    var returnType = jsdocMethod.returnvalue ? jsdocMethod.returnvalue : 'any';
+    var documentation = generateFunctionDocumentation(jsdocMethod);
+
+    return `
+${documentation}
+\t\t${name}(${parameters}): ${returnType};
+`;
 }
 
 function prefixComment(tabLevel: number, comment: string): string {
-    return comment;
+    return comment.split("\n")
+        .map((value) => Array(tabLevel).join('\t') + " * " + value)
+        .join("\n");
 }
 
 function generateVariable(jsdocParameter: model.JsdocParameter): string {
@@ -26,5 +75,21 @@ function generateVariable(jsdocParameter: model.JsdocParameter): string {
 }
 
 function generateFunctionDocumentation(jsdocFunction: model.JsdocFunction): string {
-    return "nothing";
+    var parameterDocs = jsdocFunction.parameters
+        // .filter((value) => value)
+        .map((value) => `@param ${value.name} ${value.description}`)
+        .join("\n");
+
+    var returnDoc = jsdocFunction.returnvalue && jsdocFunction.returnvalue.description ? `@return ${jsdocFunction.returnvalue.description}` : "";
+
+    var comment = prefixComment(2, `
+${jsdocFunction.description}
+${parameterDocs}
+${returnDoc}
+`);
+    return `
+\t\t/**
+${comment}
+\t\t*/
+`;
 }

@@ -59,7 +59,8 @@ getDefinition(moduleName).then((result) => {
     try {
         // console.log(result["jsdoc"].classes.map(parsers.parseClass));
         // result["jsdoc"].classes.map(parsers.parseClass);
-        console.log(util.inspect(result["jsdoc"].classes.map(parsers.parseClass), false, null));
+        // console.log(util.inspect(result["jsdoc"].classes.map(parsers.parseClass), false, null));
+        console.log(result["jsdoc"].classes.map(parsers.parseClass).map(generators.generateClass).join("\n"));
     } catch (err) {
         console.log(err);
     }

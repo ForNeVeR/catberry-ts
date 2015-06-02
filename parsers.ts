@@ -81,7 +81,8 @@ function parseConstructor(rawConstructor: any): model.JsdocConstructor {
             // TODO: These are complex parameter types; should be
             // worked around at another level
             .filter((value) => first(value.name).indexOf('.') < 0)
-            .map(parseParameter)
+            .map(parseParameter),
+        returnvalue: undefined
     };
 }
 
