@@ -66,7 +66,7 @@ ${documentation}
 
 function prefixComment(tabLevel: number, comment: string): string {
     return comment.split("\n")
-        .map((value) => Array(tabLevel).join('\t') + " * " + value)
+        .map((value) => Array(tabLevel + 1).join('\t') + " * " + value)
         .join("\n");
 }
 
