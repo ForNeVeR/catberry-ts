@@ -30,7 +30,7 @@ function generateProperty(jsdocProperty: model.JsdocProperty): string {
 
     if (jsdocProperty.description) {
         documentation =
-            `\t\t/**\n${prefixComment(2, jsdocProperty.description)}\n\t\t*/`;
+            `\t\t/**\n${prefixComment(2, jsdocProperty.description)}\n\t\t */`;
     }
 
     var variable = generateVariable(jsdocProperty);
