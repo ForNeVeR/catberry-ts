@@ -18,7 +18,8 @@
     },
     "scripts": {
         "compile": "tsd reinstall -s && gulp typescript",
-        "generate-jsdoc": "node build/generate_jsdoc.js"
+        "jsdoc": "gulp jsdoc",
+        "tsdef": "gulp tsdef"
     },
     "devDependencies": {
         "gulp": "gulpjs/gulp",
