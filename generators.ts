@@ -16,7 +16,7 @@ export function generateClass(jsdocClass: model.JsdocClass): string {
     }
 
     return `${documentation}
-\tclass ${className} ${baseClassName ? "extends" + baseClassName + " " : " "} {
+\tclass ${className} ${baseClassName ? "extends " + baseClassName + " " : " "} {
 ${properties}
 
 ${constructor}
