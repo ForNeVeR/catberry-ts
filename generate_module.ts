@@ -14,7 +14,7 @@ import generators = require("generators");
 var Promise = promise.Promise;
 
 function print_usage() {
-    console.log("Usage: node generate_modules.js <module-name> [base-modules]");
+    console.log("Usage: node generate_modules.js <module-name> [base-modules...]");
 }
 
 function readFile(fileName: string) {
@@ -48,21 +48,43 @@ function getDefinition(moduleName: string) {
     return readFile(fileName).then(parseXml, console.log)
 }
 
+function parseBaseModules() {
+    var result = [];
+    for (var i = 3; i < process.argv.length; ++i) {
+        result.push(process.argv[i]);
+    }
+    return result;
+}
+
 if (process.argv.length <= 2) {
     print_usage();
     process.exit(1);
 }
 
 var moduleName = process.argv[2];
+var baseModules = parseBaseModules();
 
-getDefinition(moduleName).then((result) => {
+getDefinition(moduleName).then((definition) => {
     try {
-        // console.log(result["jsdoc"].classes.map(parsers.parseClass));
-        // result["jsdoc"].classes.map(parsers.parseClass);
-        // console.log(util.inspect(result["jsdoc"].classes.map(parsers.parseClass), false, null));
-        console.log(result["jsdoc"].classes.map(parsers.parseClass).map(generators.generateClass).join("\n"));
+        var classes = definition["jsdoc"].classes
+            .map(parsers.parseClass)
+            .map(generators.generateClass)
+            .join("\n");
+        var references = baseModules.map((value) => `/// <reference path="${value}.d.ts"/>`).join("\n");
+        var result = `/// <reference path="../typings/tsd.d.ts"/>
+${references}
+declare module '${moduleName} {'
+${classes}
+}`;
+        var initDefinitionFileName = "definitions/" + moduleName + ".d.ts.init";
+        fs.writeFile(initDefinitionFileName, result, function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(initDefinitionFileName + " DONE");
+            }
+        });
     } catch (err) {
         console.log(err);
     }
 }, console.log);
-
