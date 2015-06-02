@@ -3,5 +3,6 @@
 /node_modules/
 /*.xml
 /*.js
+/definitions/*.d.ts.init
 
 tsconfig.json
