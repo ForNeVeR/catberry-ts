@@ -19,5 +19,5 @@ To get the initial definitions execute the following:
 
     $ npm install
     $ npm run compile
-    $ npm run generate-jsdoc
-    $ .\Generate-TsDefinitions.ps1
+    $ npm run jsdoc
+    $ npm run tsdef
