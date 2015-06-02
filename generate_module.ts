@@ -13,10 +13,6 @@ import generators = require("generators");
 
 var Promise = promise.Promise;
 
-function print_usage() {
-    console.log("Usage: node generate_modules.js <module-name> [base-modules...]");
-}
-
 function readFile(fileName: string) {
     return new Promise((resolve, reject) => {
         fs.readFile(fileName, function (err, data) {
@@ -56,35 +52,30 @@ function parseBaseModules() {
     return result;
 }
 
-if (process.argv.length <= 2) {
-    print_usage();
-    process.exit(1);
-}
-
-var moduleName = process.argv[2];
-var baseModules = parseBaseModules();
-
-getDefinition(moduleName).then((definition) => {
-    try {
-        var classes = definition["jsdoc"].classes
-            .map(parsers.parseClass)
-            .map(generators.generateClass)
-            .join("\n");
-        var references = baseModules.map((value) => `/// <reference path="${value}.d.ts"/>`).join("\n");
-        var result = `/// <reference path="../typings/tsd.d.ts"/>
+export function generate(moduleName: string, baseModules: Array<String>): void {
+    getDefinition(moduleName).then((definition) => {
+        try {
+            var classes = definition["jsdoc"].classes
+                .map(parsers.parseClass)
+                .map(generators.generateClass)
+                .join("\n");
+            var references = baseModules
+                .map((value) => `/// <reference path="${value}.d.ts"/>`).join("\n");
+            var result = `/// <reference path="../typings/tsd.d.ts"/>
 ${references}
-declare module '${moduleName} {'
+declare module '${moduleName}' {
 ${classes}
 }`;
-        var initDefinitionFileName = "definitions/" + moduleName + ".d.ts.init";
-        fs.writeFile(initDefinitionFileName, result, function (err) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(initDefinitionFileName + " DONE");
-            }
-        });
-    } catch (err) {
-        console.log(err);
-    }
-}, console.log);
+            var initDefinitionFileName = "definitions/" + moduleName + ".d.ts.init";
+            fs.writeFile(initDefinitionFileName, result, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(initDefinitionFileName + " DONE");
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }, console.log);
+}
