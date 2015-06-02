@@ -18,11 +18,11 @@ function generateMethod(jsdocMethod: model.JsdocFunction): string {
 }
 
 function prefixComment(tabLevel: number, comment: string): string {
-    return "nothing";
+    return comment;
 }
 
 function generateVariable(jsdocParameter: model.JsdocParameter): string {
-    return "nothing";
+    return jsdocParameter.name + ": " + jsdocParameter.type;
 }
 
 function generateFunctionDocumentation(jsdocFunction: model.JsdocFunction): string {
