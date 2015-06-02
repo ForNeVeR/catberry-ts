@@ -4,9 +4,9 @@ import model = require("jsdoc_model");
 export function generateClass(jsdocClass: model.JsdocClass): string {
     var className = jsdocClass.name;
     var baseClassName = jsdocClass.basename;
-    var properties = jsdocClass.properties.map(generateProperty).join("\n");
+    var properties = jsdocClass.properties.map(generateProperty).join("\n\n");
     var constructor = generateConstructor(jsdocClass.constructor);
-    var methods = jsdocClass.functions.map(generateMethod).join("\n");
+    var methods = jsdocClass.functions.map(generateMethod).join("\n\n");
 
     var documentation = "";
 
@@ -15,14 +15,14 @@ export function generateClass(jsdocClass: model.JsdocClass): string {
             `\t\t/**\n${prefixComment(2, jsdocClass.description)}\n\t\t*/`;
     }
 
-    return `
-${documentation}
+    return `${documentation}
 \tclass ${className} ${baseClassName ? "extends" + baseClassName + " " : " "} {
 ${properties}
+
 ${constructor}
+
 ${methods}
-\t} 
-`;
+\t}`;
 }
 
 function generateProperty(jsdocProperty: model.JsdocProperty): string {
@@ -35,10 +35,8 @@ function generateProperty(jsdocProperty: model.JsdocProperty): string {
 
     var variable = generateVariable(jsdocProperty);
 
-    return `
-${documentation}
-\t\t${variable};
-`;
+    return `${documentation}
+\t\t${variable};`;
 }
 
 function generateConstructor(jsdocConstructor: model.JsdocConstructor): string {
@@ -46,10 +44,8 @@ function generateConstructor(jsdocConstructor: model.JsdocConstructor): string {
     var parameters = jsdocConstructor.parameters.map(generateVariable).join(", ");
     var documentation = generateFunctionDocumentation(jsdocConstructor);
 
-    return `
-${documentation}
-\t\t${name}(${parameters});
-`;
+    return `${documentation}
+\t\t${name}(${parameters});`;
 }
 
 function generateMethod(jsdocMethod: model.JsdocFunction): string {
@@ -58,10 +54,8 @@ function generateMethod(jsdocMethod: model.JsdocFunction): string {
     var returnType = jsdocMethod.returnvalue ? jsdocMethod.returnvalue.type : 'any';
     var documentation = generateFunctionDocumentation(jsdocMethod);
 
-    return `
-${documentation}
-\t\t${name}(${parameters}): ${returnType};
-`;
+    return `${documentation}
+\t\t${name}(${parameters}): ${returnType};`;
 }
 
 function prefixComment(tabLevel: number, comment: string): string {
@@ -76,7 +70,6 @@ function generateVariable(jsdocParameter: model.JsdocParameter): string {
 
 function generateFunctionDocumentation(jsdocFunction: model.JsdocFunction): string {
     var parameterDocs = jsdocFunction.parameters
-        // .filter((value) => value)
         .map((value) => `@param ${value.name} ${value.description}`)
         .join("\n");
 
@@ -85,9 +78,7 @@ function generateFunctionDocumentation(jsdocFunction: model.JsdocFunction): stri
     var comment = prefixComment(2, `${jsdocFunction.description}
 ${parameterDocs}
 ${returnDoc}`);
-    return `
-\t\t/**
+    return `\t\t/**
 ${comment}
-\t\t */
-`;
+\t\t */`;
 }
