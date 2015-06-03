@@ -1,4 +1,3 @@
-/// <reference path="./jsdoc_model.ts"/>
 import model = require("jsdoc_model");
 
 function first(value: any): any {

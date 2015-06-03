@@ -1,8 +1,6 @@
 /// <reference path="../typings/node/node.d.ts"/>
 /// <reference path="../typings/xml2js/xml2js.d.ts"/>
 /// <reference path="../typings/es6-promise/es6-promise.d.ts"/>
-/// <reference path="./parsers.ts"/>
-/// <reference path="./generators.ts"/>
 import fs = require("fs");
 import xml2js = require("xml2js");
 import promise = require("es6-promise");
