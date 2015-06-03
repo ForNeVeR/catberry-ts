@@ -18,6 +18,4 @@ Initial definitions
 To get the initial definitions execute the following:
 
     $ npm install
-    $ npm run compile
-    $ npm run jsdoc
     $ npm run tsdef

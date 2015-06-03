@@ -17,9 +17,7 @@
         "node": ">=0.10"
     },
     "scripts": {
-        "compile": "tsd reinstall -s && gulp typescript",
-        "jsdoc": "gulp jsdoc",
-        "tsdef": "gulp tsdef"
+        "tsdef": "tsd reinstall -s && gulp tsdef"
     },
     "devDependencies": {
         "gulp": "gulpjs/gulp",

@@ -15,10 +15,10 @@ gulp.task('typescript', () => {
     })).pipe(gulp.dest('./build/'));
 });
 
-gulp.task('jsdoc', () => {
+gulp.task('jsdoc', ['typescript'], () => {
     shell.exec('node build/generate_jsdoc.js')
 });
 
-gulp.task('tsdef', () => {
+gulp.task('tsdef', ['typescript', 'jsdoc'], () => {
     shell.exec('node build/generate_tsdefinitions.js')
 });
