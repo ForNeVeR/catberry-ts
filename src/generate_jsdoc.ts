@@ -3,7 +3,7 @@ import shell = require("shelljs");
 
 function generate_doc(module: string, path: string) {
     var moduleXml = module + ".xml"
-    var jsdoc = "jsdoc -r " + path + " -t templates/haruki -d console -q format=xml > " + moduleXml;
+    var jsdoc = `jsdoc -r ${path} -t templates/haruki -d console -q format=xml > ${moduleXml}`;
     shell.exec(jsdoc, function(code, output) {
         if (code == 0) {
             console.log(module + ".xml DONE");
