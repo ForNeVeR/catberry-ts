@@ -4,11 +4,10 @@
 import gulp = require('gulp');
 import ts = require('gulp-typescript');
 import shell = require("shelljs");
-
-var isWin = /^win/.test(process.platform);
+import path = require("path");
 
 // OMG! This is so dirty I need to take a shower!
-process.env["NODE_PATH"] = "./build/" + (isWin ? ";" : ":") + process.env["NODE_PATH"];
+process.env["NODE_PATH"] = "./build/" + path.delimiter + process.env["NODE_PATH"];
 
 gulp.task('typescript', () => {
     return gulp.src('./src/*.ts').pipe(ts({
