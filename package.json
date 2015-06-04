@@ -1,0 +1,29 @@
+{
+    "name": "catberry-ts",
+    "version": "0.0.0",
+    "description": "TypeScript definitions for Catberry",
+    "author": "Friedrich von Never",
+    "contributors": [{
+        "name": "Alexey Kutepov a.k.a. rexim",
+        "email": "reximkut@gmail.com"
+    }],
+    "dependencies": {
+        "shelljs": "0.3.0",
+        "jsdoc": "3.3.0",
+        "xml2js": "0.4.8",
+        "es6-promise": "2.1.1"
+    },
+    "engines": {
+        "node": ">=0.10"
+    },
+    "scripts": {
+        "tsdef": "tsd reinstall -s && gulp tsdef"
+    },
+    "devDependencies": {
+        "gulp": "gulpjs/gulp",
+        "gulp-typescript": "^2.7.5",
+        "typescript": "1.4",
+        "tsd": "0.6.0",
+        "typescript-register": "ForNeVeR/typescript-register#js"
+    }
+}
