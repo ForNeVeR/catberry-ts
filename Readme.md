@@ -1,4 +1,4 @@
-catberry-ts
+catberry-ts [![Build Status](https://travis-ci.org/ForNeVeR/catberry-ts.svg?branch=develop)](https://travis-ci.org/ForNeVeR/catberry-ts)
 ===========
 This is a project for creation [TypeScript definition][definitelytyped] files
 for [Catberry Framework][catberry]. Finally it will be published at
