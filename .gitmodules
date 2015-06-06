@@ -4,3 +4,33 @@
 [submodule "catberry-locator"]
 	path = catberry-locator
 	url = https://github.com/catberry/catberry-locator.git
+[submodule "catberry-assets"]
+	path = catberry-assets
+	url = https://github.com/catberry/catberry-assets.git
+[submodule "catberry-oauth2-client"]
+	path = catberry-oauth2-client
+	url = https://github.com/catberry/catberry-oauth2-client.git
+[submodule "catberry-uhr"]
+	path = catberry-uhr
+	url = https://github.com/catberry/catberry-uhr.git
+[submodule "catberry-l10n-dust-helper"]
+	path = catberry-l10n-dust-helper
+	url = https://github.com/catberry/catberry-l10n-dust-helper.git
+[submodule "catberry-l10n"]
+	path = catberry-l10n
+	url = https://github.com/catberry/catberry-l10n.git
+[submodule "catberry-l10n-handlebars-helper"]
+	path = catberry-l10n-handlebars-helper
+	url = https://github.com/catberry/catberry-l10n-handlebars-helper.git
+[submodule "catberry-dust"]
+	path = catberry-dust
+	url = https://github.com/catberry/catberry-dust.git
+[submodule "catberry-jade"]
+	path = catberry-jade
+	url = https://github.com/catberry/catberry-jade.git
+[submodule "catberry-handlebars"]
+	path = catberry-handlebars
+	url = https://github.com/catberry/catberry-handlebars.git
+[submodule "catberry-uri"]
+	path = catberry-uri
+	url = https://github.com/catberry/catberry-uri.git
