@@ -48,7 +48,14 @@ function parseBaseModules() {
     return result;
 }
 
+function capitalize(s: string): string {
+    return s.split('-').map(function (part) {
+        return part[0].toUpperCase() + part.substring(1);
+    }).join('');
+}
+
 export function generate(moduleName: string, baseModules: Array<String>): void {
+    var capitalizedModuleName = capitalize(moduleName);
     getDefinition(moduleName).then((definition) => {
         try {
             var classes = definition["jsdoc"].classes
@@ -59,8 +66,12 @@ export function generate(moduleName: string, baseModules: Array<String>): void {
                 .map((value) => `/// <reference path="${value}.d.ts"/>`).join("\n");
             var result = `/// <reference path="../typings/tsd.d.ts"/>
 ${references}
-declare module '${moduleName}' {
+declare module ${capitalizedModuleName} {
 ${classes}
+}
+
+declare module '${moduleName}' {
+    export = ${capitalizedModuleName};
 }`;
             var initDefinitionFileName = "definitions/" + moduleName + ".d.ts.init";
             fs.writeFile(initDefinitionFileName, result, function (err) {
