@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-l10n-dust-helper' {
+declare module CatberryL10nDustHelper {
 
 	class LocalizationHelper {
 
@@ -19,4 +19,8 @@ declare module 'catberry-l10n-dust-helper' {
 		 */
 		getDustHelper(): Function;
 	}
+}
+
+declare module 'catberry-l10n-dust-helper' {
+    export = CatberryL10nDustHelper;
 }

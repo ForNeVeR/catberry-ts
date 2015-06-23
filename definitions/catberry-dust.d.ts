@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-dust' {
+declare module CatberryDust {
 
 	class TemplateManagerBase {
 
@@ -197,4 +197,8 @@ declare module 'catberry-dust' {
 		 */
 		getStream(name: String, context: Object): DustReadable;
 	}
+}
+
+declare module 'catberry-dust' {
+    export = CatberryDust;
 }

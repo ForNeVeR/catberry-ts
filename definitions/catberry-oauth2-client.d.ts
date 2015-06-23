@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-oauth2-client' {
+declare module CatberryOauth2Client {
 
 	class ResourceServer {
 
@@ -405,4 +405,8 @@ declare module 'catberry-oauth2-client' {
 		 */
 		removeAuthorization(context: Object): Promise<any>;
 	}
+}
+
+declare module 'catberry-oauth2-client' {
+    export = CatberryOauth2Client;
 }

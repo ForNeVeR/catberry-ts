@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-l10n' {
+declare module CatberryL10n {
 
 	class LocalizationLoader {
 		/**
@@ -98,4 +98,8 @@ declare module 'catberry-l10n' {
 		 */
 		pluralize(locale: string, key: string, n: number): string;
 	}
+}
+
+declare module 'catberry-l10n' {
+    export = CatberryL10n;
 }

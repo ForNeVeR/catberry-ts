@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-uri' {
+declare module CatberryUri {
 
 	class Authority {
 		/**
@@ -155,4 +155,8 @@ declare module 'catberry-uri' {
 		 */
 		toString(): String;
 	}
+}
+
+declare module 'catberry-uri' {
+    export = CatberryUri;
 }

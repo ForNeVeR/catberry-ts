@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-l10n-handlebars-helper' {
+declare module CatberryL10nHandlebarsHelper {
 
 	class LocalizationHelper {
 
@@ -19,4 +19,8 @@ declare module 'catberry-l10n-handlebars-helper' {
 		 */
 		getHandlebarsHelper(): Function;
 	}
+}
+
+declare module 'catberry-l10n-handlebars-helper' {
+    export = CatberryL10nHandlebarsHelper;
 }

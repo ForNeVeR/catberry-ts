@@ -1,6 +1,6 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-declare module 'catberry-assets' {
+declare module CatberryAssets {
 
 	class PostBuildAction {
 
@@ -21,4 +21,8 @@ declare module 'catberry-assets' {
 		 */
 		action(storeFinder: StoreFinder, componentFinder: ComponentFinder): Promise<any>;
 	}
+}
+
+declare module 'catberry-assets' {
+    export = CatberryAssets;
 }
