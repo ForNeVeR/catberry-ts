@@ -1,6 +1,8 @@
 /// <reference path="../typings/tsd.d.ts"/>
-
+/// <reference path="catberry.d.ts"/>
 declare module CatberryAssets {
+
+	import ComponentFinder = Catberry.ComponentFinder;
 
 	class PostBuildAction {
 
@@ -9,7 +11,7 @@ declare module CatberryAssets {
 		 * Creates new instance of the assets post build action.
 		 * @param $config Catberry application config.
 		 * @param $logger Logger.
-		 * 
+		 *
 		 */
 		PostBuildAction($config: Object, $logger: Logger);
 
