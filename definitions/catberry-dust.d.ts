@@ -2,20 +2,22 @@
 
 declare module CatberryDust {
 
+	import EventEmitter = NodeJS.EventEmitter;
+
 	class TemplateManagerBase {
 
 
 		/**
 		 * Creates new instance of template manager.
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		TemplateManagerBase();
 
 		/**
 		 * Removes template from storage.
 		 * @param name Template name.
-		 * 
+		 *
 		 */
 		remove(name: string): any;
 
@@ -24,7 +26,7 @@ declare module CatberryDust {
 		 * @param name Name of template.
 		 * @param chunk Stream chunk.
 		 * @param context Rendering context.
-		 * 
+		 *
 		 */
 		invoke(name: string, chunk: Chunk, context: Context): Chunk;
 
@@ -42,7 +44,7 @@ declare module CatberryDust {
 		/**
 		 * Creates new instance of Dust template engine.
 		 * @param $logger Logger.
-		 * 
+		 *
 		 */
 		Dust($logger: Logger);
 
@@ -62,14 +64,14 @@ declare module CatberryDust {
 		 * Creates new instance of Dust readable stream
 		 * @param dust Dust template engine.
 		 * @param opt Stream options.
-		 * 
+		 *
 		 */
 		DustReadable(dust: Dust, opt: Object);
 
 		/**
 		 * Tells stream that it is time to read.
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		flush(): any;
 	}
@@ -79,8 +81,8 @@ declare module CatberryDust {
 
 		/**
 		 * Creates new instance of filter manager.
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		FilterManager();
 
@@ -88,14 +90,14 @@ declare module CatberryDust {
 		 * Adds filter to filters set.
 		 * @param name Filter name.
 		 * @param filter Filter function.
-		 * 
+		 *
 		 */
 		add(name: string, filter: Function): any;
 
 		/**
 		 * Removes filter from filters set.
 		 * @param name Filter name.
-		 * 
+		 *
 		 */
 		remove(name: string): any;
 
@@ -113,8 +115,8 @@ declare module CatberryDust {
 
 		/**
 		 * Creates new instance of helper manager.
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		HelperManager();
 
@@ -122,14 +124,14 @@ declare module CatberryDust {
 		 * Adds helper ot helpers set.
 		 * @param name Helper name.
 		 * @param helper Helper function.
-		 * 
+		 *
 		 */
 		add(name: string, helper: Function): any;
 
 		/**
 		 * Remove helper from helper set.
 		 * @param name Helper name.
-		 * 
+		 *
 		 */
 		remove(name: string): any;
 
@@ -140,7 +142,7 @@ declare module CatberryDust {
 		 * @param context Current rendering context.
 		 * @param bodies Inner bodies.
 		 * @param params Helper params.
-		 * 
+		 *
 		 */
 		invoke(name: string, chunk: Chunk, context: Context, bodies: Array<any>, params: Object): Chunk;
 	}
@@ -150,15 +152,15 @@ declare module CatberryDust {
 
 		/**
 		 * Creates new instance of template manager.
-		 * 
-		 * 
+		 *
+		 *
 		 */
 		TemplateManager();
 
 		/**
 		 * Compiles template source into function source.
 		 * @param source Dust template source.
-		 * 
+		 *
 		 */
 		compile(source: string): string;
 
@@ -166,7 +168,7 @@ declare module CatberryDust {
 		 * Register compiled function.
 		 * @param name Template name.
 		 * @param compiled Compiled function source.
-		 * 
+		 *
 		 */
 		registerCompiled(name: string, compiled: string): any;
 	}
@@ -178,7 +180,7 @@ declare module CatberryDust {
 		 * Creates new instance of template provider.
 		 * @param $dust Dust template engine.
 		 * @param $eventBus Event bus.
-		 * 
+		 *
 		 */
 		TemplateProvider($dust: Dust, $eventBus: EventEmitter);
 

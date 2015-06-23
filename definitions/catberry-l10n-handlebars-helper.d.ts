@@ -1,6 +1,8 @@
 /// <reference path="../typings/tsd.d.ts"/>
-
+/// <reference path="catberry-l10n.d.ts"/>
 declare module CatberryL10nHandlebarsHelper {
+
+	import LocalizationProvider = CatberryL10n.LocalizationProvider;
 
 	class LocalizationHelper {
 
@@ -8,13 +10,13 @@ declare module CatberryL10nHandlebarsHelper {
 		/**
 		 * Creates new instance of localization helper.
 		 * @param $localizationProvider Localization provider.
-		 * 
+		 *
 		 */
 		LocalizationHelper($localizationProvider: LocalizationProvider);
 
 		/**
 		 * Gets handlebars helper for localization.
-		 * 
+		 *
 		 * @return Handlebars helper function.
 		 */
 		getHandlebarsHelper(): Function;

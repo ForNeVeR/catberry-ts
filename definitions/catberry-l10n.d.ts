@@ -1,6 +1,8 @@
 /// <reference path="../typings/tsd.d.ts"/>
-
+/// <reference path="catberry-locator.d.ts"/>
 declare module CatberryL10n {
+
+	import ServiceLocator = CatberryLocator.ServiceLocator;
 
 	class LocalizationLoader {
 		/**
@@ -27,20 +29,20 @@ declare module CatberryL10n {
 		 * Creates new instance of server-side localization loader.
 		 * @param $serviceLocator Locator to resolve dependencies.
 		 * @param l10n Localization config.
-		 * 
+		 *
 		 */
 		LocalizationLoader($serviceLocator: ServiceLocator, l10n: Object);
 
 		/**
 		 * Loads localization by locale.
 		 * @param locale Locale to load.
-		 * 
+		 *
 		 */
 		load(locale: string): any;
 
 		/**
 		 * Gets connect/express middleware for setting locale to cookieand response with localization file.
-		 * 
+		 *
 		 * @return Express/connect middleware.
 		 */
 		getMiddleware(): Function;
@@ -50,7 +52,7 @@ declare module CatberryL10n {
 		 * @param request HTTP request.
 		 * @param response HTTP response.
 		 * @param locale Locale name.
-		 * 
+		 *
 		 */
 		_setLocaleToResponse(request: http.IncomingMessage, response: http.ServerResponse, locale: string): any;
 	}
@@ -62,14 +64,14 @@ declare module CatberryL10n {
 		 * Creates new instance of localization provider.
 		 * @param $localizationLoader Localization loaderto load locales.
 		 * @param l10n Localization config.
-		 * 
+		 *
 		 */
 		LocalizationProvider($localizationLoader: LocalizationLoader, l10n: Object);
 
 		/**
 		 * Gets current locale value from context.
 		 * @param context Component context.
-		 * 
+		 *
 		 */
 		getCurrentLocale(context: Object): any;
 
@@ -77,7 +79,7 @@ declare module CatberryL10n {
 		 * Changes current locale value.
 		 * @param locale Locale name (i.e. en, en-us, ru etc).
 		 * @param context Component context.
-		 * 
+		 *
 		 */
 		changeLocale(locale: string, context: Object): any;
 
